@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
 # Create your models here.
@@ -110,5 +110,9 @@ def post_save_create_profile_receiver(sender, instance, created, **kwargs):
         except:
             UserProfile.objects.create(user=instance)
             print('Profile did not exist but is now created')
+        
+@receiver(pre_save, sender=User)
+def pre_save_profile_receiver(sender, instance, **kwargs):
+    print(instance.username, 'this user is being saved')
 
 
