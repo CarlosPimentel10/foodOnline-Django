@@ -7,7 +7,6 @@ from .models import User
 def registerUser(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
-        print(request.POST)
         if form.is_valid():
            """  password = form.cleaned_data['password']
             user = form.save(commit=False)
@@ -24,9 +23,11 @@ def registerUser(request):
            user.save()
            print('User is created')
            return redirect('registerUser')
+        else:
+            print(form.errors)
     else:
         form = UserForm()
-    form = UserForm()
+    
     context = {
         'form': form,
         }
