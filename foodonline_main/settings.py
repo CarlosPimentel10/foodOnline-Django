@@ -168,7 +168,7 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
-GOOGLE_API_KEY = config('GOOGLE_API_KEY')
+GOOGLE_API_KEY = 'AIzaSyDNecgVJWMugRKB4cd6O_5Z4OZnUjYM4SQ'
 
 os.environ['PATH'] = os.path.join(BASE_DIR, r'C:\Users\Carlos\foodOnline\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
 os.environ['PROJ_LIB'] = os.path.join(BASE_DIR, r'C:\Users\Carlos\foodOnline\Lib\site-packages\osgeo\data\proj') + ';' + os.environ['PATH']
