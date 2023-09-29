@@ -1,6 +1,3 @@
-from django.shortcuts import render
-
-# Create your views here.
 from unicodedata import category
 from urllib import response
 from django.http import HttpResponse, JsonResponse
