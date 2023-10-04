@@ -173,3 +173,5 @@ GOOGLE_API_KEY = config('GOOGLE_API_KEY')
 os.environ['PATH'] = os.path.join(BASE_DIR, r'C:\Users\Carlos\foodOnline\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
 os.environ['PROJ_LIB'] = os.path.join(BASE_DIR, r'C:\Users\Carlos\foodOnline\Lib\site-packages\osgeo\data\proj') + ';' + os.environ['PATH']
 GDAL_LIBRARY_PATH = os.path.join(BASE_DIR, r'C:\Users\Carlos\foodOnline\Lib\site-packages\osgeo\gdal304.dll')
+
+PAYPAL_CLIENT_ID = config('PAYPAL_CLIENT_ID')
