@@ -1,71 +1,162 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FoodOnline</title>
+    <!-- Google Font Family Link Start -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800" />
+    <!-- Google Font Family Link End -->
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>FoodOnline</title>
-	<!-- Google Font Family Link Start -->
-	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
-	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800">
-	<!-- Google Font Family Link End -->
+    <!-- CSS -->
+    <link href="{% static 'css/iconmoon.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/cs-foodbakery-plugin.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link href="{% static 'css/bootstrap-slider.css' %}" rel="stylesheet" />
 
-	<!-- CSS -->
-	<link href="{% static 'css/iconmoon.css' %}" rel="stylesheet">
-	<link href="{% static 'css/style.css' %}" rel="stylesheet">
-	<link href="{% static 'css/cs-foodbakery-plugin.css' %}" rel="stylesheet">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<link href="{% static 'css/bootstrap-slider.css' %}" rel="stylesheet">
-	
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	
-	<!-- JAVASCRIPT -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="{% static 'js/modernizr.js' %}"></script>
-	<script src="{% static 'js/bootstrap.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-	<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <!-- JAVASCRIPT -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{% static 'js/modernizr.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
 
-	{% if '/' == request.path or 'profile' in request.path %}
-	<script src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_API_KEY}}&libraries=places&callback=initAutoComplete" defer></script>
-	{% endif %}
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<script src="{% static 'js/custom.js' %}"></script>
-	
-	<!-- Include the PayPal JavaScript SDK -->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
+
+    {% comment %} {% if '/' == request.path or 'profile' in request.path %}
+      <!-- Google Maps -->
+      <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}&libraries=places&callback=initAutoComplete" defer></script>
+    {% endif %} {% endcomment %}
+    <!-- Mapbox Search -->
+    <script id="search-js" defer src="https://api.mapbox.com/search-js/v1.0.0-beta.17/web.js"></script>
+    <script>
+      const script = document.getElementById('search-js')
+      script.onload = function () {
+        mapboxsearch.autofill({
+          accessToken: 'pk.eyJ1IjoiY3BpbWVudGVsMTAiLCJhIjoiY2xmNzN1OHN3MDNhcTNzbnZxbWU3bXM4NSJ9._JsRmKdcWwtVFrdpFjNmxg'
+        })
+      }
+    </script>
+    {% if '/' == request.path or 'profile' in request.path %}
+      <script src="https://api.mapbox.com/geocoding/v5/mapbox.places/autocomplete.js?access_token={{ YOUR_MAPBOX_API_KEY }}&callback=initMapboxAutoComplete" defer></script>
+    {% endif %}
+    <script id="search-js" defer src="https://api.mapbox.com/search-js/v1.0.0-beta.17/web.js"></script>
+    <script>
+      const accessToken = 'pk.eyJ1IjoiY3BpbWVudGVsMTAiLCJhIjoiY2xmNzN1OHN3MDNhcTNzbnZxbWU3bXM4NSJ9._JsRmKdcWwtVFrdpFjNmxg'
+      
+      const script = document.getElementById('search-js')
+      script.onload = function () {
+        mapboxsearch.autofill({
+          accessToken
+        })
+      }
+    </script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+
+    <!-- Include the PayPal JavaScript SDK -->
     <script src="https://www.paypal.com/sdk/js?client-id={{ PAYPAL_CLIENT_ID }}&currency=USD"></script>
 
-	<!-- Include Datatables plugin script and css -->
-	<link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-	<script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-	<script>
-		$(document).ready( function () {
-			$('#myOrdersTable').DataTable();
-		} );
-	</script>
+    <!-- Include Datatables plugin script and css -->
+    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('#myOrdersTable').DataTable()
+      })
+    </script>
 
-	<style>
-		body, .main-section p, .mce-content-body p{
-			font:Normal  14px/24px "Open Sans", sans-serif;letter-spacing: 0px;text-transform: none;color: #515151 !important;
-		}
-	</style>
-</head>
+    <style>
+      body,
+      .main-section p,
+      .mce-content-body p {
+        font: Normal 14px/24px 'Open Sans', sans-serif;
+        letter-spacing: 0px;
+        text-transform: none;
+        color: #515151 !important;
+      }
+    </style>
+  </head>
 
-<body>
-
+  <body>
     <!-- LOAD NAVBAR HERE -->
     {% include 'includes/navbar.html' %}
 
     <!-- LOAD CONTENT HERE -->
     {% block content %}
-        <!-- CONTENT GOES HERE -->
+      <!-- CONTENT GOES HERE -->
+      <!-- Add an input field for the autocomplete -->
+      <input type="text" id="place-autocomplete" placeholder="Search for a place" />
+      <ul id="place-results"></ul>
+
+      <script>
+        const accessToken = 'pk.eyJ1IjoiY3BpbWVudGVsMTAiLCJhIjoiY2xmNzN1OHN3MDNhcTNzbnZxbWU3bXM4NSJ9._JsRmKdcWwtVFrdpFjNmxg'
+        // Initialize the Mapbox Places client
+        const placesClient = mapboxSdk({ accessToken: accessToken })
+        
+        // Get the input field and place results element
+        const inputField = document.getElementById('id_address')
+        const placeResults = document.getElementById('place-results')
+        
+        // Create a function to populate place results
+        function populatePlaceResults(results) {
+          placeResults.innerHTML = ''
+        
+          results.features.forEach((feature) => {
+            const placeName = feature.place_name
+            const placeCoordinates = feature.geometry.coordinates
+        
+            // Create a list item for the place
+            const placeListItem = document.createElement('li')
+            placeListItem.textContent = placeName
+        
+            // Add the place coordinates to the list item as a data attribute
+            placeListItem.setAttribute('data-coordinates', placeCoordinates)
+        
+            // Add a click event listener to select the place
+            placeListItem.addEventListener('click', () => {
+              // Retrieve the coordinates from the data attribute
+              const coordinates = placeListItem.getAttribute('data-coordinates').split(',')
+              const latitude = parseFloat(coordinates[1])
+              const longitude = parseFloat(coordinates[0])
+        
+              // Use the selected coordinates as needed
+              console.log('Selected place coordinates: ', latitude, longitude)
+            })
+        
+            // Add the list item to the place results element
+            placeResults.appendChild(placeListItem)
+          })
+        }
+        
+        // Add an input event listener to trigger the search
+        inputField.addEventListener('input', (event) => {
+          const query = event.target.value
+        
+          // Use the Mapbox Places client to perform a search
+          placesClient.geocoding
+            .forwardGeocode({
+              query: query,
+              types: ['place']
+            })
+            .send()
+            .then((response) => {
+              // Populate the place results with the search results
+              populatePlaceResults(response.body)
+            })
+            .catch((error) => {
+              console.error('Geocoding error: ', error)
+            })
+        })
+      </script>
     {% endblock %}
 
     <!-- LOAD FOOTER HERE -->
     {% include 'includes/footer.html' %}
-
-
-	
-		
+  </body>
+</html>

@@ -73,7 +73,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'accounts.context_processors.get_vendor',
-                'accounts.context_processors.get_google_api',
+                # 'accounts.context_processors.get_google_api',
+                'accounts.context_processors.get_mapbox_api',
                 'marketplace.context_processors.get_cart_counter',
                 'marketplace.context_processors.get_cart_amounts',
                 'accounts.context_processors.get_user_profile',
@@ -168,7 +169,8 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
-GOOGLE_API_KEY = config('GOOGLE_API_KEY')
+# GOOGLE_API_KEY = config('GOOGLE_API_KEY')
+MAPBOX_API_KEY = config('Mapbox_API_KEY')
 
 os.environ['PATH'] = os.path.join(BASE_DIR, r'C:\Users\Carlos\foodOnline\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
 os.environ['PROJ_LIB'] = os.path.join(BASE_DIR, r'C:\Users\Carlos\foodOnline\Lib\site-packages\osgeo\data\proj') + ';' + os.environ['PATH']
