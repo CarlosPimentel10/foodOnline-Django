@@ -1,6 +1,6 @@
 let autocomplete;
 
-function initAutoComplete(){
+/* function initAutoComplete(){
 autocomplete = new google.maps.places.Autocomplete(
     document.getElementById('id_address'),
     {
@@ -69,8 +69,95 @@ function onPlaceChanged (){
         }
     }
 
-}
+} */
 
+function initMapboxAutoComplete() {
+    const input = document.getElementById('id_address');
+    const geocoder = new MapboxGeocoder({
+        accessToken: 'pk.eyJ1IjoiY3BpbWVudGVsMTAiLCJhIjoiY2xmNzN1OHN3MDNhcTNzbnZxbWU3bXM4NSJ9._JsRmKdcWwtVFrdpFjNmxg',
+        mapboxgl: mapboxgl, // Make sure you've included mapbox-gl.js
+    });
+
+    input.addEventListener('change', function () {
+        const placeName = input.value;
+
+        // Search for places using the Mapbox Geocoding API.
+        geocoder.query(placeName, function (error, results) {
+            if (error) {
+                console.error(error);
+                return;
+            }
+
+            // Display the results to the user. You can access the results array.
+            // For example: results.features[0].text is the place name, and results.features[0].center is the latitude and longitude.
+        });
+    });
+}
+$(document).ready(function () {
+    // Initialize Mapbox Geocoder
+    initMapboxAutoComplete();
+});
+
+  
+
+// Create a Mapbox Geocoder object.
+const geocoder = new mapboxGeocoder({
+    accessToken: 'pk.eyJ1IjoiY3BpbWVudGVsMTAiLCJhIjoiY2xmNzN1OHN3MDNhcTNzbnZxbWU3bXM4NSJ9._JsRmKdcWwtVFrdpFjNmxg',
+  });
+  
+  // Add a listener to the input element's `change` event.
+  document.getElementById('id_address').addEventListener('change', function() {
+    // Get the place name from the input element.
+    const placeName = document.getElementById('id_address').value;
+  
+    // Search for places using the Mapbox Geocoding API.
+    geocoder.forwardGeocode(placeName, function(results, error) {
+      if (error) {
+        console.error(error);
+        return;
+      }
+  
+      // Get the first result.
+      const result = results[0];
+  
+      // Get the latitude and longitude of the result.
+      const latitude = result.geometry.coordinates[0];
+      const longitude = result.geometry.coordinates[1];
+  
+      // Set the latitude and longitude fields.
+      document.getElementById('id_latitude').value = latitude;
+      document.getElementById('id_longitude').value = longitude;
+  
+      // Get the address components of the result.
+      const addressComponents = result.address_components;
+  
+      // Loop through the address components and assign them to the fields.
+      for (const addressComponent of addressComponents) {
+        for (const type of addressComponent.types) {
+          // Get the country.
+          if (type === 'country') {
+            document.getElementById('id_country').value = addressComponent.long_name;
+          }
+  
+          // Get the state.
+          if (type === 'administrative_area_level_1') {
+            document.getElementById('id_state').value = addressComponent.long_name;
+          }
+  
+          // Get the city.
+          if (type === 'locality') {
+            document.getElementById('id_city').value = addressComponent.long_name;
+          }
+  
+          // Get the pincode.
+          if (type === 'postal_code') {
+            document.getElementById('id_pin_code').value = addressComponent.long_name;
+          }
+        }
+      }
+    });
+  });
+  
 
 $(document).ready(function(){
     // add to cart

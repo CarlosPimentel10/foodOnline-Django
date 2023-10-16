@@ -102,8 +102,11 @@
                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                     <div class="field-holder">
                                                         <label>Address *</label>
-                                                        {{profile_form.address}}
-                                                        <small class="text-muted float-right">powered by Google</small>
+                                                        
+                                                        <form>
+                                                            <input name="address" placeholder="Address" type="text" autocomplete="address-line1" />
+                                                        </form>
+                                                        <small class="text-muted float-right">powered by Mapbox</small>
                                                     </div>
                                                 </div>
                                                 
