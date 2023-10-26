@@ -77,6 +77,8 @@ function initMapboxAutoComplete() {
         accessToken: 'pk.eyJ1IjoiY3BpbWVudGVsMTAiLCJhIjoiY2xmNzN1OHN3MDNhcTNzbnZxbWU3bXM4NSJ9._JsRmKdcWwtVFrdpFjNmxg',
         mapboxgl: mapboxgl,
     });
+    
+    document.getElementById('id_address').appendChild(geocoder.onAdd(map));
 
     input.addEventListener('change', function () {
         const placeName = input.value;
